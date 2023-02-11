@@ -67,7 +67,6 @@
         "serve": "vite preview",
         "pm2-setup": "pm2 deploy production setup",
         "deploy": "pm2 deploy production",
-        "build:release": "vite build --mode release",
         "start": "serve -s dist"
     },
     "eslintConfig": {
