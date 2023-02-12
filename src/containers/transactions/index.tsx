@@ -139,7 +139,8 @@ class TransactionsTable extends ApiComponent<
                                     {
                                         title: 'TID',
                                         dataIndex: '_id',
-                                        render: (_, { transactionId }) => transactionId.slice(-4),
+                                        render: (_, { transactionId }) =>
+                                            transactionId.slice(-4),
                                         width: 10,
                                     },
                                     {
@@ -147,6 +148,7 @@ class TransactionsTable extends ApiComponent<
                                         dataIndex: '_id',
                                         render: (_, { user }) => user.username,
                                         width: 15,
+                                        responsive: ['lg', 'md'],
                                     },
                                     {
                                         title: 'Amount',
@@ -187,6 +189,7 @@ class TransactionsTable extends ApiComponent<
                                                     .format('MMMM Do, h:mm a')}
                                             </>
                                         ),
+                                        responsive: ['lg', 'md'],
                                     },
 
                                     {
