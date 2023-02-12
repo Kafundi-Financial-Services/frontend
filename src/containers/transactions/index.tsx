@@ -128,74 +128,73 @@ class TransactionsTable extends ApiComponent<
                                 </React.Fragment>
                             }
                         >
-                         
-                                    <Table
-                                        rowKey={(record) => record.id}
-                                        pagination={{
-                                            defaultPageSize: 5,
-                                            hideOnSinglePage: true,
-                                            showSizeChanger: false,
-                                        }}
-                                        columns={[
-                                            {
-                                                title: 'Transaction ID',
-                                                dataIndex: '_id',
-                                                render: (_, {_id})=> _id.slice(-3) 
-                                            },
-                                            {
-                                                title: 'Amount',
-                                                dataIndex: 'amount',
-                                            },
-                                            {
-                                                title: 'Status',
-                                                dataIndex: 'status',
-                                                // render: (_, record: any) =>
-                                                //     record.address.locale,
-                                                render: (_, {status}) => {
-                                                    console.log(status, 'statuse')
-                                                    let color: string
-                                                    if (status === "PENDING") {
-                                                        color = "volcano";
-                                                    } else color = "green"
-                                                    return (
-						<Tag color={color} key={status}>
-							{status.toUpperCase()}
-						</Tag>
-					);
-                                                  
-                                                }
-		
-		
-                                            },
-                                            {
-                                                title: 'Profit',
-                                                dataIndex: 'profit',
-                                                render: (_, {profit}) =>
-                                                    Math.round(profit)
-                                            },
-                                         
-                                            {
-                                                title: 'CREATED AT',
-                                                dataIndex: 'createdAt',
-                                                render: (createdAt) => (
-                                                    <>
-                                                        {moment(createdAt)
-                                                            .tz(
-                                                                'Africa/Kampala'
-                                                            )
-                                                            .format(
-                                                                'MMMM Do, h:mm a'
-                                                            )}
-                                                    </>
-                                                ),
-                                            },
-                                            
-                                            {
-                                                title: 'ACTION',
-                                                dataIndex: 'actions',
-                                                render: (_, record) => (
-                                                    <span>
-                                                        {/* <User data={record}>
+                            <Table
+                                rowKey={(record) => record.id}
+                                pagination={{
+                                    defaultPageSize: 5,
+                                    hideOnSinglePage: true,
+                                    showSizeChanger: true,
+                                }}
+                                columns={[
+                                    {
+                                        title: 'TID',
+                                        dataIndex: '_id',
+                                        render: (_, { transactionId }) => transactionId.slice(-4),
+                                        width: 10,
+                                    },
+                                    {
+                                        title: 'BY',
+                                        dataIndex: '_id',
+                                        render: (_, { user }) => user.username,
+                                        width: 15,
+                                    },
+                                    {
+                                        title: 'Amount',
+                                        dataIndex: 'amount',
+                                    },
+                                    {
+                                        title: 'Status',
+                                        dataIndex: 'status',
+                                        // render: (_, record: any) =>
+                                        //     record.address.locale,
+                                        render: (_, { status }) => {
+                                            console.log(status, 'statuse')
+                                            let color: string
+                                            if (status === 'PENDING') {
+                                                color = 'volcano'
+                                            } else color = 'green'
+                                            return (
+                                                <Tag color={color} key={status}>
+                                                    {status.toUpperCase()}
+                                                </Tag>
+                                            )
+                                        },
+                                    },
+                                    {
+                                        title: 'Profit',
+                                        dataIndex: 'profit',
+                                        render: (_, { profit }) =>
+                                            Math.round(profit),
+                                    },
+
+                                    {
+                                        title: 'CREATED AT',
+                                        dataIndex: 'createdAt',
+                                        render: (createdAt) => (
+                                            <>
+                                                {moment(createdAt)
+                                                    .tz('Africa/Kampala')
+                                                    .format('MMMM Do, h:mm a')}
+                                            </>
+                                        ),
+                                    },
+
+                                    {
+                                        title: 'ACTION',
+                                        dataIndex: 'actions',
+                                        render: (_, record) => (
+                                            <span>
+                                                {/* <User data={record}>
                                                 <Button
                                                     shape="circle"
                                                     type="primary"
@@ -203,93 +202,77 @@ class TransactionsTable extends ApiComponent<
                                                     <EditOutlined />
                                                 </Button>
                                             </User> */}
-                                                        <Popconfirm
-                                                            title="Sure to delete?"
-                                                            onConfirm={() =>
-                                                                this.deletePathData(
-                                                                    {
-                                                                        path: `/transactions/${record._id}`,
-                                                                    }
-                                                                ).then(() =>
-                                                                    this.props.emitRootKeyChanged()
-                                                                )
-                                                            }
-                                                        >
-                                                            <Button
-                                                                type="primary"
-                                                                danger
-                                                                shape="circle"
-                                                                style={{
-                                                                    marginLeft:
-                                                                        '10px',
-                                                                }}
-                                                                icon={
-                                                                    <DeleteOutlined />
-                                                                }
-                                                            />
-                                                        </Popconfirm>
-                                                        <Popconfirm
-                                                            title="sure to approve?"
-                                                            onConfirm={() => {
-                                                                console.log(
-                                                                    record
-                                                                )
+                                                <Popconfirm
+                                                    title="Sure to delete?"
+                                                    onConfirm={() =>
+                                                        this.deletePathData({
+                                                            path: `/transactions/${record._id}`,
+                                                        }).then(() =>
+                                                            this.props.emitRootKeyChanged()
+                                                        )
+                                                    }
+                                                >
+                                                    <Button
+                                                        type="primary"
+                                                        danger
+                                                        shape="circle"
+                                                        style={{
+                                                            marginLeft: '10px',
+                                                        }}
+                                                        icon={
+                                                            <DeleteOutlined />
+                                                        }
+                                                    />
+                                                </Popconfirm>
+                                                <Popconfirm
+                                                    title="sure to approve?"
+                                                    onConfirm={() => {
+                                                        console.log(record)
 
-                                                                this.updatePathData(
-                                                                    {
-                                                                        path: `/transactions/${record._id}`,
-                                                                        data: {
-                                                                            status:
-                                                                                'SUCCESS',
-                                                                            confirmedAt: new Date(),
-                                                                        },
-                                                                    }
+                                                        this.updatePathData({
+                                                            path: `/transactions/${record._id}`,
+                                                            data: {
+                                                                status:
+                                                                    'SUCCESS',
+                                                                confirmedAt: new Date(),
+                                                            },
+                                                        })
+                                                            .then(() => {
+                                                                this.props.emitRootKeyChanged()
+                                                            })
+                                                            .catch((e) => {
+                                                                message.error(
+                                                                    e.message
                                                                 )
-                                                                    .then(
-                                                                        () => {
-                                                                            this.props.emitRootKeyChanged()
-                                                                        }
-                                                                    )
-                                                                    .catch(
-                                                                        (e) => {
-                                                                            message.error(
-                                                                                e.message
-                                                                            )
-                                                                        }
-                                                                    )
-                                                            }}
-                                                        >
-                                                            <Button
-                                                                type="primary"
-                                                                shape="circle"
-                                                                style={{
-                                                                    marginLeft:
-                                                                        '10px',
-                                                                }}
-                                                                icon={
-                                                                    <CheckOutlined />
-                                                                }
-                                                            />
-                                                        </Popconfirm>
-                                                    </span>
-                                                ),
-                                            },
-                                        ]}
-                                        // dataSource={this.state.transactions}
-                                        dataSource={this.state.transactions}
-                                        size="small"
-                                    />
-                                    <Add>
-    <Button
-                                type="primary"
-                                style={{ marginTop: '15px' }}
-                            >
-                               <FileAddOutlined />
-                                ADD
-                            </Button>
-                                    </Add>
-                                
-                           
+                                                            })
+                                                    }}
+                                                >
+                                                    <Button
+                                                        type="primary"
+                                                        shape="circle"
+                                                        style={{
+                                                            marginLeft: '10px',
+                                                        }}
+                                                        icon={<CheckOutlined />}
+                                                    />
+                                                </Popconfirm>
+                                            </span>
+                                        ),
+                                    },
+                                ]}
+                                // dataSource={this.state.transactions}
+                                dataSource={this.state.transactions}
+                                size="small"
+                            />
+                            <Add>
+                                <Button
+                                    type="primary"
+                                    style={{ marginTop: '15px' }}
+                                >
+                                    <FileAddOutlined />
+                                    ADD
+                                </Button>
+                            </Add>
                         </Card>
                     </Col>
                 </Row>

@@ -81,6 +81,21 @@ class AddTransaction extends ApiComponent<
                                     }
                                 />
                             </Form.Item>
+                            <Form.Item
+                                label="TRANSACTION ID"
+                                required={!this.props.data}
+                            >
+                                <Input
+                                    type="text"
+                                    placeholder="Transaction ID"
+                                    name="amount"
+                                    size="large"
+                                    value={this.state.data.transactionId}
+                                    onChange={(e: any) =>
+                                        this.setData('transactionId', e.target.value)
+                                    }
+                                />
+                            </Form.Item>
                             {/* <Form.Item
                                 label="STATUS"
                                 required={!this.props.data}
