@@ -140,8 +140,8 @@ class TransactionsTable extends ApiComponent<
                                         title: 'TID',
                                         dataIndex: '_id',
                                         render: (_, { transactionId }) =>
-                                            transactionId.slice(-4),
-                                        width: 10,
+                                            transactionId.slice(-6),
+                                        width: 40,
                                     },
                                     {
                                         title: 'BY',
@@ -157,6 +157,7 @@ class TransactionsTable extends ApiComponent<
                                     {
                                         title: 'Status',
                                         dataIndex: 'status',
+                                        width: "20%",
                                         // render: (_, record: any) =>
                                         //     record.address.locale,
                                         render: (_, { status }) => {
