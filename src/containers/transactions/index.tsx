@@ -177,7 +177,7 @@ class TransactionsTable extends ApiComponent<
                                         title: 'Profit',
                                         dataIndex: 'profit',
                                         render: (_, { profit }) =>
-                                            Math.round(profit),
+                                            profit.toFixed(2),
                                     },
 
                                     {
