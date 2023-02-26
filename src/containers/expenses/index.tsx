@@ -167,6 +167,11 @@ class ExpensesTable extends ApiComponent<
                                     //     },
                                     // },
                                     {
+                                        title: 'EXPENSE',
+                                        dataIndex: 'expense',
+                        
+                                    },
+                                    {
                                         title: 'CREATED AT',
                                         dataIndex: 'createdAt',
                                         render: (createdAt) => (
@@ -179,80 +184,45 @@ class ExpensesTable extends ApiComponent<
                                         responsive: ['lg', 'md'],
                                     },
 
+
                                     {
-                                        title: 'EXPENSE',
-                                        dataIndex: 'expense',
-                        
+                                        title: 'ACTION',
+                                        dataIndex: 'actions',
+                                        render: (_, record) => (
+                                            <span>
+
+                                                <Popconfirm
+                                                    title="Sure to delete?"
+                                                    onConfirm={() =>
+                                                        this.deletePathData({
+                                                            path: `/expenses/${record._id}`,
+                                                        }).then(() =>
+                                                            this.props.emitRootKeyChanged()
+                                                        )
+                                                    }
+                                                >
+                                                    <Button
+                                                        type="primary"
+                                                        danger
+                                                        shape="circle"
+                                                        style={{
+                                                            marginLeft: '10px',
+                                                        }}
+                                                        icon={
+                                                            <DeleteOutlined />
+                                                        }
+                                                    />
+                                                </Popconfirm>
+                                          
+                                            </span>
+                                        ),
                                     },
-
-                                    // {
-                                    //     title: 'ACTION',
-                                    //     dataIndex: 'actions',
-                                    //     render: (_, record) => (
-                                    //         <span>
-
-                                    //             <Popconfirm
-                                    //                 title="Sure to delete?"
-                                    //                 onConfirm={() =>
-                                    //                     this.deletePathData({
-                                    //                         path: `/expenses/${record._id}`,
-                                    //                     }).then(() =>
-                                    //                         this.props.emitRootKeyChanged()
-                                    //                     )
-                                    //                 }
-                                    //             >
-                                    //                 <Button
-                                    //                     type="primary"
-                                    //                     danger
-                                    //                     shape="circle"
-                                    //                     style={{
-                                    //                         marginLeft: '10px',
-                                    //                     }}
-                                    //                     icon={
-                                    //                         <DeleteOutlined />
-                                    //                     }
-                                    //                 />
-                                    //             </Popconfirm>
-                                    //             <Popconfirm
-                                    //                 title="sure to approve?"
-                                    //                 onConfirm={() => {
-                                    //                     console.log(record)
-
-                                    //                     this.updatePathData({
-                                    //                         path: `/expenses/${record._id}`,
-                                    //                         data: {
-                                    //                             status:
-                                    //                                 'SUCCESS',
-                                    //                             confirmedAt: new Date(),
-                                    //                         },
-                                    //                     })
-                                    //                         .then(() => {
-                                    //                             this.props.emitRootKeyChanged()
-                                    //                         })
-                                    //                         .catch((e) => {
-                                    //                             message.error(
-                                    //                                 e.message
-                                    //                             )
-                                    //                         })
-                                    //                 }}
-                                    //             >
-                                    //                 <Button
-                                    //                     type="primary"
-                                    //                     shape="circle"
-                                    //                     style={{
-                                    //                         marginLeft: '10px',
-                                    //                     }}
-                                    //                     icon={<CheckOutlined />}
-                                    //                 />
-                                    //             </Popconfirm>
-                                    //         </span>
-                                    //     ),
-                                    // },
                                 ]}
                                 // dataSource={this.state.expenses}
                                 dataSource={this.state.expenses}
                                 size="small"
                             />
+                            
                             <Add>
                                 <Button
                                     type="primary"
