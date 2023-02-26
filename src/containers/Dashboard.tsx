@@ -124,7 +124,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
     fetchCollections() {
         this.getPathData({ path: '/statistics' })
             .then((stats: any) => {
-                console.log(stats, 'stats')       
+                console.log(stats, 'stats');
+                
+        
 
                 this.setState({
                     monthlyExpenses: stats.monthlyExpenses[0].amount,

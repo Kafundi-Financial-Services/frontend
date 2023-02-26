@@ -26,3 +26,4 @@ src/styles/dark.json
 src/styles/light.json
 src/styles/theme.json
 src/containers/items/o.js
+/package.json

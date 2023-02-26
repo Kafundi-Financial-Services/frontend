@@ -212,7 +212,8 @@ class TransactionsTable extends ApiComponent<
                                                         this.deletePathData({
                                                             path: `/transactions/${record._id}`,
                                                         }).then(() =>
-                                                            this.props.emitRootKeyChanged()
+                                                            // this.props.emitRootKeyChanged()
+                                                            message.success('The transaction has been deleted')
                                                         )
                                                     }
                                                 >
@@ -242,7 +243,12 @@ class TransactionsTable extends ApiComponent<
                                                             },
                                                         })
                                                             .then(() => {
-                                                                this.props.emitRootKeyChanged()
+                                                                // this.props.emitRootKeyChanged()
+                                                            message.success('The transaction has been approved')
+                                                            message.success(
+                                                                'Status will be updated on page reload',5
+                                                            )
+
                                                             })
                                                             .catch((e) => {
                                                                 message.error(
