@@ -141,13 +141,13 @@ class TransactionsTable extends ApiComponent<
                                         dataIndex: '_id',
                                         render: (_, { transactionId }) =>
                                             transactionId.slice(-6),
-                                        width: 40,
+                                        // width: 40,
                                     },
                                     {
                                         title: 'BY',
                                         dataIndex: '_id',
                                         render: (_, { user }) => user.username,
-                                        width: 15,
+                                        // width: 15,
                                         responsive: ['lg', 'md'],
                                     },
                                     {
@@ -157,7 +157,7 @@ class TransactionsTable extends ApiComponent<
                                     {
                                         title: 'Status',
                                         dataIndex: 'status',
-                                        width: "20%",
+                                        // width: "20%",
                                         // render: (_, record: any) =>
                                         //     record.address.locale,
                                         render: (_, { status }) => {

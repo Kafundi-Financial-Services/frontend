@@ -3,12 +3,15 @@ import {
     CarOutlined,
     ContactsOutlined,
     DashboardOutlined,
+UsergroupAddOutlined,
     FileAddOutlined,
     LogoutOutlined,
     SettingOutlined,
     ShoppingCartOutlined,
+    DollarOutlined,
     TeamOutlined,
     RestOutlined,
+    SplitCellsOutlined
 } from '@ant-design/icons'
 import { Button, Col, Layout, Menu, Row } from 'antd'
 import React, { Fragment, RefObject } from 'react'
@@ -28,6 +31,7 @@ import LoggedInCatchAll from './LoggedInCatchAll'
 import Transactions from './transactions'
 import Settings from './settings'
 import Staff from './staff'
+import Expenses from './expenses'
 
 const { Header, Content, Sider } = Layout
 
@@ -130,16 +134,19 @@ class PageRoot extends ApiComponent<
                       {
                           key: 'transactions',
                           name: 'TRANSACTIONS',
-                          icon: <ShoppingCartOutlined />,
+                          icon: <DollarOutlined />,
                       },
-                     
-                     
+                      {
+                          key: 'expenses',
+                          name: 'Expenses',
+                          icon: <SplitCellsOutlined />,
+                      },
+
                       {
                           key: 'staff',
                           name: 'STAFF',
-                          icon: <ContactsOutlined />,
+                          icon: <UsergroupAddOutlined />,
                       },
-                     
                   ]
                 : [
                       {
@@ -147,8 +154,6 @@ class PageRoot extends ApiComponent<
                           name: 'Transactions',
                           icon: <ShoppingCartOutlined />,
                       },
-                      
-                   
                   ]),
             {
                 key: 'settings',
@@ -331,7 +336,14 @@ class PageRoot extends ApiComponent<
                                     component={Dashboard}
                                 />
                                 <Route path="/staff/" component={Staff} />
-                                <Route path="/transactions" component={Transactions} />                         
+                                <Route
+                                    path="/expenses"
+                                    component={Expenses}
+                                />
+                                <Route
+                                    path="/transactions"
+                                    component={Transactions}
+                                />
                                 <Route path="/settings/" component={Settings} />
                                 <Route path="/" component={LoggedInCatchAll} />
                             </Switch>

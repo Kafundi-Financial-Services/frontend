@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 # Set working directory
 WORKDIR /app
 # Copy all files from current directory to working dir in image
