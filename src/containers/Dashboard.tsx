@@ -131,10 +131,10 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                 this.setState({
                     monthlyExpenses: stats.monthlyExpenses[0].amount,
                     monthlyTransactions: stats.monthlyTransactions[0].amount,
-                    monthlyProfits: stats.monthlyTransactions[0].amount-stats.monthlyExpenses[0].amount,
+                    monthlyProfits: stats.monthlyProfits[0].profit,
                         dailyTransactions: stats.dailyTransactions[0].amount,
                         dailyExpenses: stats.dailyExpenses[0].amount,
-                        dailyProfits: stats.dailyTransactions[0].amount - stats.dailyExpenses[0].amount,
+                        dailyProfits: stats.dailyProfits[0].profit,
                 });
 
 
@@ -199,7 +199,7 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Collections"
-                                value={`USD ${this.state.dailyTransactions}`}
+                                value={`${this.state.dailyTransactions}`}
                                 // precision={2}
                             />
                         </Card>
@@ -208,9 +208,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Profits"
-                                value={`USD ${Math.round(
+                                value={`${
                                     Number(this.state.dailyProfits)
-                                )}`}
+                                }`}
                                 precision={2}
                             />
                         </Card>
@@ -219,9 +219,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Expenses"
-                                value={`USD ${Math.round(
+                                value={`${
                                     Number(this.state.dailyExpenses)
-                                )}`}
+                                }`}
                                 precision={2}
                             />
                         </Card>
@@ -234,8 +234,8 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Collections"
-                                value={`USD ${this.state.monthlyTransactions}`}
-                                // precision={2}
+                                value={`${this.state.monthlyTransactions}`}
+                                precision={2}
                             />
                         </Card>
                     </Col>
@@ -243,9 +243,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Profits"
-                                value={`USD ${Math.round(
+                                value={`${
                                     Number(this.state.monthlyProfits)
-                                )}`}
+                                }`}
                                 precision={2}
                             />
                         </Card>
@@ -254,9 +254,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         <Card>
                             <Statistic
                                 title="Expenses"
-                                value={`USD ${Math.round(
+                                value={`${
                                     Number(this.state.monthlyExpenses)
-                                )}`}
+                                }`}
                                 precision={2}
                             />
                         </Card>
