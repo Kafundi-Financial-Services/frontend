@@ -4,7 +4,7 @@ import {
     ShoppingCartOutlined,
     FileAddOutlined
 } from '@ant-design/icons'
-import { Button, Card, Col, message, Popconfirm, Row, Table, Tabs, Input, Tag } from 'antd'
+import { Button, Card, Col, message, Popconfirm, Row, Table, Tabs, Input, Tag, DatePicker } from 'antd'
 import moment from 'moment-timezone'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -27,9 +27,10 @@ class TransactionsTable extends ApiComponent<
         apiData: any
         isLoading: boolean
         confirmOrder: boolean
-            transactions: undefined
-
-     
+        transactions: undefined
+        startDate: any
+        endDate: any,
+        dates: []
     }
 > {
     constructor(props: any) {
@@ -39,7 +40,10 @@ class TransactionsTable extends ApiComponent<
             apiData: undefined,
             isLoading: false,
             confirmOrder: false,
-            transactions: undefined
+            transactions: undefined,
+            startDate: undefined,
+            endDate: undefined,
+            dates: []
         }
     }
 
@@ -50,22 +54,15 @@ class TransactionsTable extends ApiComponent<
 
     reFetchData(isLoading: boolean) {
         this.setState({ isLoading }, () => {
-            this.getPathData({ path: '/browse/transactions' })
+            this.getPathData({ path: '/browsequery/transactions', query: {startDate: this.state.startDate, endDate: this.state.endDate} })
                 .then(({ items }: any) => {
                     console.log(items, 'transactions')
 
-                    const paid = items.filter(
-                        (e: any) => e.payment === 'successful'
-                    )
-
-                    const unpaid = items.filter(
-                        (e: any) => e.payment !== 'successful'
-                    )
+                
                     this.setState({
                         isLoading: false,
                         apiData: items,
                         transactions: items,
-                        
                     })
 
                     // this.props.emitRootKeyChanged()
@@ -76,7 +73,6 @@ class TransactionsTable extends ApiComponent<
 
     componentDidMount() {
         this.reFetchData(true)
-
     }
 
     render() {
@@ -103,6 +99,10 @@ class TransactionsTable extends ApiComponent<
             />
         )
 
+        const { RangePicker } = DatePicker
+
+      
+
         return (
             <div>
                 <Row justify="center">
@@ -111,22 +111,41 @@ class TransactionsTable extends ApiComponent<
                         lg={{ span: 23 }}
                         style={{ paddingBottom: 300 }}
                     >
+                        <RangePicker
+                            onCalendarChange={(_, dateStrings) => {
+                              console.log(dateStrings)
+                              if(dateStrings[0]){
+                                this.setState({
+                                    startDate: dateStrings[0]
+                                })
+                              }
+
+                              if (dateStrings[1]) {
+                                  this.setState({
+                                      endDate: dateStrings[1],
+                                  })
+                              }
+
+                            //   console.log(this.state)
+                        
+                        }}
+                        /> <Button color='primary' onClick={()=> {if(this.state.startDate && this.state.endDate)this.reFetchData(true)}}>Search</Button>
                         <Card
                             // extra={!this.props.isMobile && searchAppInput}
-                            title={
-                                <React.Fragment>
-                                    <span>
-                                        <ShoppingCartOutlined />
-                                        {`  `} TRANSACTIONS
-                                    </span>
-                                    <br />
-                                    {this.props.isMobile && (
-                                        <div style={{ marginTop: 8 }}>
-                                            {searchAppInput}
-                                        </div>
-                                    )}
-                                </React.Fragment>
-                            }
+                            // title={
+                            //     <React.Fragment>
+                            //         {/* <span>
+                            //             <ShoppingCartOutlined />
+                            //             {`  `} TRANSACTIONS
+                            //         </span> */}
+                            //         <br />
+                            //         {this.props.isMobile && (
+                            //             <div style={{ marginTop: 8 }}>
+                            //                 {searchAppInput}
+                            //             </div>
+                            //         )}
+                            //     </React.Fragment>
+                            // }
                         >
                             <Table
                                 rowKey={(record) => record.id}
@@ -231,7 +250,7 @@ class TransactionsTable extends ApiComponent<
                                                         }
                                                     />
                                                 </Popconfirm>
-                                              
+                                            
                                                     <Button
                                                         type="primary"
                                                         shape="circle"
@@ -239,37 +258,8 @@ class TransactionsTable extends ApiComponent<
                                                             marginLeft: '10px',
                                                         }}
                                                         icon={<CheckOutlined />}
-                                                        onClick={() => {
-                                                            console.log(record)
-
-                                                            this.updatePathData(
-                                                                {
-                                                                    path: `/transactions/${record._id}`,
-                                                                    data: {
-                                                                        status:
-                                                                            'SUCCESS',
-                                                                        confirmedAt: new Date(),
-                                                                    },
-                                                                }
-                                                            )
-                                                                .then(() => {
-                                                                    // this.props.emitRootKeyChanged()
-                                                                    message.success(
-                                                                        'The transaction has been approved'
-                                                                    )
-                                                                    message.success(
-                                                                        'Status will be updated on page reload',
-                                                                        5
-                                                                    )
-                                                                })
-                                                                .catch((e) => {
-                                                                    message.error(
-                                                                        e.message
-                                                                    )
-                                                                })
-                                                        }}
                                                     />
-                                               
+                                              
                                             </span>
                                         ),
                                     },
@@ -278,7 +268,7 @@ class TransactionsTable extends ApiComponent<
                                 dataSource={this.state.transactions}
                                 size="small"
                             />
-                            <Add>
+                            {/* <Add>
                                 <Button
                                     type="primary"
                                     style={{ marginTop: '15px' }}
@@ -286,7 +276,7 @@ class TransactionsTable extends ApiComponent<
                                     <FileAddOutlined />
                                     ADD
                                 </Button>
-                            </Add>
+                            </Add> */}
                         </Card>
                     </Col>
                 </Row>

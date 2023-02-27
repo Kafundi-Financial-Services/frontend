@@ -32,6 +32,7 @@ import Transactions from './transactions'
 import Settings from './settings'
 import Staff from './staff'
 import Expenses from './expenses'
+import AllTransactions from './allTransactions'
 
 const { Header, Content, Sider } = Layout
 
@@ -140,6 +141,11 @@ class PageRoot extends ApiComponent<
                           key: 'expenses',
                           name: 'Expenses',
                           icon: <SplitCellsOutlined />,
+                      },
+                      {
+                          key: 'allTransactions',
+                          name: 'ALL',
+                          icon: <UsergroupAddOutlined />,
                       },
 
                       {
@@ -336,13 +342,14 @@ class PageRoot extends ApiComponent<
                                     component={Dashboard}
                                 />
                                 <Route path="/staff/" component={Staff} />
-                                <Route
-                                    path="/expenses"
-                                    component={Expenses}
-                                />
+                                <Route path="/expenses" component={Expenses} />
                                 <Route
                                     path="/transactions"
                                     component={Transactions}
+                                />
+                                <Route
+                                    path="/allTransactions"
+                                    component={AllTransactions}
                                 />
                                 <Route path="/settings/" component={Settings} />
                                 <Route path="/" component={LoggedInCatchAll} />
