@@ -34,7 +34,7 @@ class AddTransaction extends ApiComponent<
     add() {
         this.setState({ isLoading: true }, () => {
             this[this.props.data ? 'updatePathData' : 'postPathData']({
-                path: '/transactions',
+                path: '/tempcash',
                 data: xtend(this.state.data),
             })
                 .then((response) => {
@@ -43,7 +43,7 @@ class AddTransaction extends ApiComponent<
                 })
                 .catch((err) => {
                     console.log(err)
-                    message.success('this is an error')
+                    message.error('this is an error')
                     this.setState({ isLoading: false })
                 })
         })
@@ -70,17 +70,17 @@ class AddTransaction extends ApiComponent<
                     ) : (
                         <Form layout="vertical">
                             <Form.Item
-                                label="TRANSACTION ID"
+                                label="NAME"
                                 required={!this.props.data}
                             >
                                 <Input
                                     type="text"
-                                    placeholder="Transaction ID"
+                                    placeholder="NAME"
                                     name="amount"
                                     size="large"
-                                    value={this.state.data.transactionId}
+                                    value={this.state.data.name}
                                     onChange={(e: any) =>
-                                        this.setData('transactionId', e.target.value)
+                                        this.setData('name', e.target.value)
                                     }
                                     autoFocus
                                 />

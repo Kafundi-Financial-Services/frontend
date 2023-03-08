@@ -34,7 +34,7 @@ class AddTransaction extends ApiComponent<
     add() {
         this.setState({ isLoading: true }, () => {
             this[this.props.data ? 'updatePathData' : 'postPathData']({
-                path: '/transactions',
+                path: '/debts',
                 data: xtend(this.state.data),
             })
                 .then((response) => {
@@ -53,7 +53,7 @@ class AddTransaction extends ApiComponent<
         return (
             <>
                 <Modal
-                    title={`${this.props.data ? 'UPDATE' : 'NEW'} TRANSACTION`}
+                    title={`${this.props.data ? 'UPDATE' : 'NEW'} DEDT`}
                     visible={this.state.isModalVisible}
                     onOk={this.add.bind(this)}
                     onCancel={() =>
@@ -70,17 +70,17 @@ class AddTransaction extends ApiComponent<
                     ) : (
                         <Form layout="vertical">
                             <Form.Item
-                                label="TRANSACTION ID"
+                                label="Name"
                                 required={!this.props.data}
                             >
                                 <Input
                                     type="text"
-                                    placeholder="Transaction ID"
+                                    placeholder="Name"
                                     name="amount"
                                     size="large"
-                                    value={this.state.data.transactionId}
+                                    value={this.state.data.name}
                                     onChange={(e: any) =>
-                                        this.setData('transactionId', e.target.value)
+                                        this.setData('name', e.target.value)
                                     }
                                     autoFocus
                                 />
@@ -100,25 +100,7 @@ class AddTransaction extends ApiComponent<
                                     }
                                 />
                             </Form.Item>
-                          
-                            <Form.Item label="VODA">
-                                <Select
-                                    onChange={(value: any) => {
-                                        if(value == "Yes") this.setData('voda', true)
-                                    }}
-                                    value={this.state.data.roles}
-                                    size="large"
-                                
-                                    placeholder="Is this transaction from bunya?"
-                                    // defaultValue={false}
-                                >
-                                    {['Yes',"No"].map((option, index) => (
-                                        <Select.Option value={option} key={index}>
-                                            {option}
-                                        </Select.Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
+                    
                         </Form>
                     )}
                 </Modal>

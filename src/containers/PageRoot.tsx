@@ -33,6 +33,9 @@ import Settings from './settings'
 import Staff from './staff'
 import Expenses from './expenses'
 import AllTransactions from './allTransactions'
+import TempCash from './tempCash'
+import Debts from './debts'
+import Calculations from './calculations'
 
 const { Header, Content, Sider } = Layout
 
@@ -143,11 +146,25 @@ class PageRoot extends ApiComponent<
                           icon: <SplitCellsOutlined />,
                       },
                       {
+                          key: 'debts',
+                          name: 'Debts',
+                          icon: <SplitCellsOutlined />,
+                      },
+                      {
+                          key: 'tempcash',
+                          name: 'Tempcash',
+                          icon: <SplitCellsOutlined />,
+                      },
+                      {
+                          key: 'calculations',
+                          name: 'Calculations',
+                          icon: <SplitCellsOutlined />,
+                      },
+                      {
                           key: 'allTransactions',
                           name: 'ALL',
                           icon: <UsergroupAddOutlined />,
                       },
-
                       {
                           key: 'staff',
                           name: 'STAFF',
@@ -220,6 +237,7 @@ class PageRoot extends ApiComponent<
                                                     borderRadius: 5,
                                                     padding: 8,
                                                 }}
+                                            
                                             >
                                                 <ClickableLink
                                                     onLinkClicked={this.logout.bind(
@@ -352,6 +370,10 @@ class PageRoot extends ApiComponent<
                                     component={AllTransactions}
                                 />
                                 <Route path="/settings/" component={Settings} />
+                                <Route path="/tempcash/" component={TempCash} />
+
+                                <Route path="/debts/" component={Debts} />
+                                <Route path="/calculations/" component={Calculations} />
                                 <Route path="/" component={LoggedInCatchAll} />
                             </Switch>
                         </div>
