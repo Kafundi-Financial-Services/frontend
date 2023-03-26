@@ -29,7 +29,7 @@ class ExpensesTable extends ApiComponent<
         confirmOrder: boolean
             expenses: undefined
 
-     
+
     }
 > {
     constructor(props: any) {
@@ -65,7 +65,7 @@ class ExpensesTable extends ApiComponent<
                         isLoading: false,
                         apiData: items,
                         expenses: items,
-                        
+
                     })
 
                     // this.props.emitRootKeyChanged()
@@ -169,7 +169,7 @@ class ExpensesTable extends ApiComponent<
                                     {
                                         title: 'EXPENSE',
                                         dataIndex: 'expense',
-                        
+
                                     },
                                     {
                                         title: 'CREATED AT',
@@ -213,7 +213,7 @@ class ExpensesTable extends ApiComponent<
                                                         }
                                                     />
                                                 </Popconfirm>
-                                          
+
                                             </span>
                                         ),
                                     },
@@ -222,7 +222,7 @@ class ExpensesTable extends ApiComponent<
                                 dataSource={this.state.expenses}
                                 size="small"
                             />
-                            
+
                             <Add>
                                 <Button
                                     type="primary"

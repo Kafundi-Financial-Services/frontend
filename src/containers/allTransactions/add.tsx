@@ -38,7 +38,7 @@ class AddTransaction extends ApiComponent<
                 data: xtend(this.state.data),
             })
                 .then((response) => {
-                    console.log(response,'transactions')
+                    console.log(response, 'transactions')
                     this.props.emitRootKeyChanged()
                 })
                 .catch((err) => {

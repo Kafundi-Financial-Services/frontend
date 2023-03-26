@@ -92,7 +92,7 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         'Fri',
                         'Sat',
                         'Sun',
-                     
+
                     ],
                 },
             ],
@@ -114,7 +114,7 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
     fetchStats() {
         this.getPathData({ path: '/statistics/monthly' })
             .then((stats: any) => {
-                console.log(stats, 'stats month');
+                console.log(stats, 'stats month')
                 this.setState({ stats })
                 this.fetchCollections()
             })
@@ -124,9 +124,9 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
     fetchCollections() {
         this.getPathData({ path: '/statistics' })
             .then((stats: any) => {
-                console.log(stats, 'stats');
-                
-        
+                console.log(stats, 'stats')
+
+
 
                 this.setState({
                     monthlyExpenses: stats.monthlyExpenses[0].amount,
@@ -135,7 +135,7 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                         dailyTransactions: stats.dailyTransactions[0].amount,
                         dailyExpenses: stats.dailyExpenses[0].amount,
                         dailyProfits: stats.dailyProfits[0].profit,
-                });
+                })
 
 
             })
@@ -195,7 +195,7 @@ export default class Dashboard extends ApiComponent<RouteComponentProps<any>, an
                 </Row>
                 <Row justify="center" gutter={20} title="Daily">
                     <Col>
-                     
+
                         <Card>
                             <Statistic
                                 title="Collections"

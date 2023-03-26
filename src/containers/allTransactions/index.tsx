@@ -58,7 +58,7 @@ class TransactionsTable extends ApiComponent<
                 .then(({ items }: any) => {
                     console.log(items, 'transactions')
 
-                
+
                     this.setState({
                         isLoading: false,
                         apiData: items,
@@ -101,51 +101,64 @@ class TransactionsTable extends ApiComponent<
 
         const { RangePicker } = DatePicker
 
-      
+
 
         return (
             <div>
+                <Row justify="center" style={{margin: 10}}>
+
+                    <Col>
+                        <RangePicker
+                            onCalendarChange={(_, dateStrings) => {
+                                console.log(dateStrings)
+                                if (dateStrings[0]) {
+                                    this.setState({
+                                        startDate: dateStrings[0],
+                                    })
+                                }
+
+                                if (dateStrings[1]) {
+                                    this.setState({
+                                        endDate: dateStrings[1],
+                                    })
+                                }
+
+                                //   console.log(this.state)
+                            }}
+                        />
+                        <Button
+                            color="primary"
+                            onClick={() => {
+                                if (this.state.startDate && this.state.endDate)
+                                    this.reFetchData(true)
+                            }}
+                        >
+                            Search
+                        </Button>
+                    </Col>
+                </Row>
                 <Row justify="center">
                     <Col
                         xs={{ span: 23 }}
                         lg={{ span: 23 }}
                         style={{ paddingBottom: 300 }}
                     >
-                        <RangePicker
-                            onCalendarChange={(_, dateStrings) => {
-                              console.log(dateStrings)
-                              if(dateStrings[0]){
-                                this.setState({
-                                    startDate: dateStrings[0]
-                                })
-                              }
-
-                              if (dateStrings[1]) {
-                                  this.setState({
-                                      endDate: dateStrings[1],
-                                  })
-                              }
-
-                            //   console.log(this.state)
-                        
-                        }}
-                        /> <Button color='primary' onClick={()=> {if(this.state.startDate && this.state.endDate)this.reFetchData(true)}}>Search</Button>
                         <Card
-                            // extra={!this.props.isMobile && searchAppInput}
-                            // title={
-                            //     <React.Fragment>
-                            //         {/* <span>
-                            //             <ShoppingCartOutlined />
-                            //             {`  `} TRANSACTIONS
-                            //         </span> */}
-                            //         <br />
-                            //         {this.props.isMobile && (
-                            //             <div style={{ marginTop: 8 }}>
-                            //                 {searchAppInput}
-                            //             </div>
-                            //         )}
-                            //     </React.Fragment>
-                            // }
+                        // extra={!this.props.isMobile && searchAppInput}
+                        // title={
+                        //     <React.Fragment>
+                        //         {/* <span>
+                        //             <ShoppingCartOutlined />
+                        //             {`  `} TRANSACTIONS
+                        //         </span> */}
+                        //         <br />
+                        //         {this.props.isMobile && (
+                        //             <div style={{ marginTop: 8 }}>
+                        //                 {searchAppInput}
+                        //             </div>
+                        //         )}
+                        //     </React.Fragment>
+                        // }
                         >
                             <Table
                                 rowKey={(record) => record.id}
@@ -250,16 +263,42 @@ class TransactionsTable extends ApiComponent<
                                                         }
                                                     />
                                                 </Popconfirm>
-                                            
-                                                    <Button
-                                                        type="primary"
-                                                        shape="circle"
-                                                        style={{
-                                                            marginLeft: '10px',
-                                                        }}
-                                                        icon={<CheckOutlined />}
-                                                    />
-                                              
+
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    style={{
+                                                        marginLeft: '10px',
+                                                    }}
+                                                    icon={<CheckOutlined />}
+                                                    onClick={() => {
+                                                        console.log(record)
+
+                                                        this.updatePathData({
+                                                            path: `/transactions/${record._id}`,
+                                                            data: {
+                                                                status: 'SUCCESS',
+                                                                confirmedAt:
+                                                                    new Date(),
+                                                            },
+                                                        })
+                                                            .then(() => {
+                                                                // this.props.emitRootKeyChanged()
+                                                                message.success(
+                                                                    'The transaction has been approved'
+                                                                )
+                                                                message.success(
+                                                                    'Status will be updated on page reload',
+                                                                    5
+                                                                )
+                                                            })
+                                                            .catch((e) => {
+                                                                message.error(
+                                                                    e.message
+                                                                )
+                                                            })
+                                                    }}
+                                                />
                                             </span>
                                         ),
                                     },

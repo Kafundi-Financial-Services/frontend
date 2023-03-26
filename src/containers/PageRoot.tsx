@@ -237,7 +237,7 @@ class PageRoot extends ApiComponent<
                                                     borderRadius: 5,
                                                     padding: 8,
                                                 }}
-                                            
+
                                             >
                                                 <ClickableLink
                                                     onLinkClicked={this.logout.bind(

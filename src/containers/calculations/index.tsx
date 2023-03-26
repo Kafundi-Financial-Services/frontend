@@ -4,7 +4,7 @@ import {
     ShoppingCartOutlined,
     FileAddOutlined
 } from '@ant-design/icons'
-import { Button, Card, Col, message, Popconfirm,Form, Row, Table, Tabs, Input, Tag, DatePicker } from 'antd'
+import { Button, Card, Col, message, Popconfirm, Form, Row, Table, Tabs, Input, Tag, DatePicker } from 'antd'
 import moment from 'moment-timezone'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -36,7 +36,7 @@ class TransactionsTable extends ApiComponent<
         startDate: any,
         endDate: any,
         showResult: boolean,
-   
+
     }
 > {
     constructor(props: any) {
@@ -53,7 +53,7 @@ class TransactionsTable extends ApiComponent<
             cash: undefined,
             startDate: undefined,
             endDate: undefined,
-            showResult: false, 
+            showResult: false,
         }
     }
 
@@ -116,7 +116,7 @@ class TransactionsTable extends ApiComponent<
         })
     }
 
-    
+
 
     render() {
         if (this.state.isLoading) return <CenteredSpinner />
@@ -282,10 +282,10 @@ class TransactionsTable extends ApiComponent<
                                             {`  `} RESULT
                                         </span>
                                         <br />
-                                      
+
                                     </React.Fragment>
                                 }
-                                
+
                             >
                                 <Row justify='center'>
 

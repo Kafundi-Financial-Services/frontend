@@ -38,7 +38,7 @@ class AddTransaction extends ApiComponent<
                 data: xtend(this.state.data),
             })
                 .then((response) => {
-                    console.log(response,'transactions')
+                    console.log(response, 'transactions')
                     this.props.emitRootKeyChanged()
                 })
                 .catch((err) => {
@@ -100,19 +100,19 @@ class AddTransaction extends ApiComponent<
                                     }
                                 />
                             </Form.Item>
-                          
+
                             <Form.Item label="VODA">
                                 <Select
                                     onChange={(value: any) => {
-                                        if(value == "Yes") this.setData('voda', true)
+                                        if (value == "Yes") this.setData('voda', true)
                                     }}
                                     value={this.state.data.roles}
                                     size="large"
-                                
+
                                     placeholder="Is this transaction from bunya?"
                                     // defaultValue={false}
                                 >
-                                    {['Yes',"No"].map((option, index) => (
+                                    {['Yes', "No"].map((option, index) => (
                                         <Select.Option value={option} key={index}>
                                             {option}
                                         </Select.Option>

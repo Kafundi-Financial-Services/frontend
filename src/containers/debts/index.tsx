@@ -29,7 +29,7 @@ class TransactionsTable extends ApiComponent<
         confirmOrder: boolean
             debts: undefined
 
-     
+
     }
 > {
     constructor(props: any) {
@@ -65,7 +65,7 @@ class TransactionsTable extends ApiComponent<
                         isLoading: false,
                         apiData: items,
                         debts: items,
-                        
+
                     })
 
                     // this.props.emitRootKeyChanged()
@@ -173,7 +173,7 @@ class TransactionsTable extends ApiComponent<
                                             )
                                         },
                                     },
-                                    
+
 
                                     {
                                         title: 'ACTION',
@@ -213,7 +213,7 @@ class TransactionsTable extends ApiComponent<
                                                         }
                                                     />
                                                 </Popconfirm>
-                                              
+
                                                     <Button
                                                         type="primary"
                                                         shape="circle"
@@ -251,7 +251,7 @@ class TransactionsTable extends ApiComponent<
                                                                 })
                                                         }}
                                                     />
-                                               
+
                                             </span>
                                         ),
                                     },
