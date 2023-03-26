@@ -7,7 +7,7 @@ COPY . .
 ENV NODE_ENV production
 
 # install node modules and build assets
-RUN npm install serve 
+RUN npm i serve
 # RUN npm run build
 
 CMD [ "npm", "start" ]
