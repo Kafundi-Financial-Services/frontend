@@ -134,6 +134,7 @@ class TransactionsTable extends ApiComponent<
                                     defaultPageSize: 5,
                                     hideOnSinglePage: true,
                                     showSizeChanger: true,
+                                    pageSize: 10
                                 }}
                                 columns={[
                                     {
@@ -211,13 +212,22 @@ class TransactionsTable extends ApiComponent<
                                                     onConfirm={() =>
                                                         this.deletePathData({
                                                             path: `/transactions/${record._id}`,
-                                                        }).then(() =>
-                                                            // this.props.emitRootKeyChanged()
-                                                            message.success(
-                                                                'The transaction has been deleted'
+                                                        })
+                                                            .then(() =>
+                                                                // this.props.emitRootKeyChanged()
+                                                                message.success(
+                                                                    'The transaction has been deleted'
+                                                                )
                                                             )
-                                                        )
+                                                            .catch(() =>
+                                                                message.error(
+                                                                    'Failed to delete transaction, try again later'
+                                                                )
+                                                            )
                                                     }
+                                                    okButtonProps={{
+                                                        loading: this.state.isLoading
+                                                    }}
                                                 >
                                                     <Button
                                                         type="primary"
@@ -232,44 +242,46 @@ class TransactionsTable extends ApiComponent<
                                                     />
                                                 </Popconfirm>
 
-                                                    <Button
-                                                        type="primary"
-                                                        shape="circle"
-                                                        style={{
-                                                            marginLeft: '10px',
-                                                        }}
-                                                        icon={<CheckOutlined />}
-                                                        onClick={() => {
-                                                            console.log(record)
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    style={{
+                                                        marginLeft: '10px',
+                                                    }}
+                                                    icon={<CheckOutlined />}
+                                                    onClick={() => {
+                                                        // console.log(record)
 
-                                                            this.updatePathData(
-                                                                {
-                                                                    path: `/transactions/${record._id}`,
-                                                                    data: {
-                                                                        status:
-                                                                            'SUCCESS',
-                                                                        confirmedAt: new Date(),
-                                                                    },
-                                                                }
-                                                            )
-                                                                .then(() => {
-                                                                    // this.props.emitRootKeyChanged()
-                                                                    message.success(
-                                                                        'The transaction has been approved'
-                                                                    )
-                                                                    message.success(
-                                                                        'Status will be updated on page reload',
-                                                                        5
-                                                                    )
-                                                                })
-                                                                .catch((e) => {
-                                                                    message.error(
-                                                                        e.message
-                                                                    )
-                                                                })
-                                                        }}
-                                                    />
+                                                        this.setState({isLoading: true})
 
+                                                        this.updatePathData({
+                                                            path: `/transactions/${record._id}`,
+                                                            data: {
+                                                                status: 'SUCCESS',
+                                                                confirmedAt:
+                                                                    new Date(),
+                                                            },
+                                                        })
+                                                            .then(() => {
+                                                                // this.props.emitRootKeyChanged()
+                                                                this.setState({isLoading: false});
+                                                                message.success(
+                                                                    'The transaction has been approved'
+                                                                );
+
+                                                                message.success(
+                                                                    'Status will be updated on page reload',
+                                                                    5
+                                                                );
+
+                                                            })
+                                                            .catch((e) => {
+                                                                message.error(
+                                                                    e.message
+                                                                )
+                                                            })
+                                                    }}
+                                                />
                                             </span>
                                         ),
                                     },

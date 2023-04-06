@@ -109,6 +109,7 @@ class UsersTable extends ApiComponent<
                                 defaultPageSize: 5,
                                 hideOnSinglePage: true,
                                 showSizeChanger: false,
+                                pageSize: 10
                             }}
                             columns={[
                                 {

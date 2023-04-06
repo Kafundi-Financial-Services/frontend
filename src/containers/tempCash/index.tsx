@@ -134,6 +134,7 @@ class TransactionsTable extends ApiComponent<
                                     defaultPageSize: 5,
                                     hideOnSinglePage: true,
                                     showSizeChanger: true,
+                                    pageSize: 10
                                 }}
                                 columns={[
                                     {
